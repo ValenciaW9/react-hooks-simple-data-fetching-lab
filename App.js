@@ -1,24 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 
-function App() {
+const App = () => {
   const [dogImage, setDogImage] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://dog.ceo/api/breeds/image/random');
-        const data = await response.json();
-        setDogImage(data.message);
-      } catch (error) {
-        console.error('Error fetching dog image:', error);
-      }
-    };
-
-    fetchData();
+    fetch('https://dog.ceo/api/breeds/image/random')
+      .then(response => response.json())
+      .then(data => setDogImage(data.message));
   }, []);
-
-  console.log(dogImage); // Log the value of dogImage
 
   return (
     <div>
@@ -29,6 +18,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;
